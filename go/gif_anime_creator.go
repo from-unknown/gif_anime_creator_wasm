@@ -1,3 +1,4 @@
+// Package gifanimecreator creates gif animation from picture file
 // +build js,wasm
 package gifanimecreator
 
@@ -19,7 +20,7 @@ import (
 type GifAnimeCreator struct {
 	inBuf                  []uint8
 	outBuf                 bytes.Buffer
-	onImgLoadCb, initMemCb js.Callback
+	onImgLoadCb, initMemCb js.Func
 	sourceImg              image.Image
 
 	console js.Value

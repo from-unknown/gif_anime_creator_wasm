@@ -12,14 +12,6 @@ func TestSimple(t *testing.T) {
 
 	filePath := "picture/Thinking_Face_Emoji.jpg"
 
-	//imageFile, err := os.Open(filePath)
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
-	//defer imageFile.Close()
-
-	//b := make([]byte, imageFile.)
-	//len, err := imageFile.Read(b)
 	b, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		log.Fatal(err)
