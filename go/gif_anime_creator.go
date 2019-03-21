@@ -35,7 +35,7 @@ func New() *GifAnimeCreator {
 }
 
 func (g *GifAnimeCreator) Start() {
-	// Setup callbacks
+	// Setup functions
 	g.setupInitMemCb()
 	js.Global().Set("initMem", g.initMemCb)
 
@@ -52,6 +52,8 @@ func (g *GifAnimeCreator) ConvertImage(argStartFlag string, argEndFlag string, a
 	var delays []int
 	var disposal []byte
 
+	// sourceImg is already decoded
+	// ソース画像はデコード済み
 	rect := g.sourceImg.Bounds()
 	for i := 0; i < 10; i++ {
 		var drawXBound int
@@ -156,6 +158,8 @@ func (g *GifAnimeCreator) updateImage(start time.Time) {
 	out := g.outBuf.Bytes()
 	hdr := (*reflect.SliceHeader)(unsafe.Pointer(&out))
 	ptr := uintptr(unsafe.Pointer(hdr.Data))
+	// set pointer and length to JS function
+	// 画像がセットされたポインターと画像の長さをJSの関数に渡す
 	js.Global().Call("displayImage", ptr, len(out))
 	g.console.Call("log", "time taken:", time.Now().Sub(start).String())
 	g.outBuf.Reset()
